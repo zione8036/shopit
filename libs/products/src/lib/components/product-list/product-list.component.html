@@ -1,0 +1,31 @@
+<div class="container-fluid pt-5 pb-3">
+  <div class="">
+    <div class="p-grid">
+      <div class="p-col-2" *ngIf="!isCategoryPage">
+        <h4 class="text-uppercase">
+          <span class="bg-secondary">Categories</span>
+        </h4>
+        <div class="field-checkbox" *ngFor="let data of cetgories">
+          <p-checkbox
+            [(ngModel)]="data.checked"
+            [binary]="true"
+            [inputId]="data.id"
+            (onChange)="categoryFilter()"
+          ></p-checkbox>
+          <span> </span>
+          <label for="{{ data.id }}">{{ data.name }}</label>
+        </div>
+      </div>
+      <div [ngClass]="{ 'p-col-10': !isCategoryPage, 'p-col-12': isCategoryPage }">
+        <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+          <span class="bg-secondary pr-3"> {{ isCategoryPage ? 'Category' : 'All' }} Products</span>
+        </h2>
+        <div class="row px-xl-5">
+          <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let data of products">
+            <products-item [product]="data"></products-item>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

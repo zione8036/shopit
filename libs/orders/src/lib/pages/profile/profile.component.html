@@ -1,0 +1,155 @@
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+  <div class="row px-xl-5">
+    <div class="col-8">
+      <button (click)="back()" class="btn btn-danger">Cancel</button>
+    </div>
+    <div class="col-4">
+      <div class="input-group"></div>
+    </div>
+  </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Checkout Start -->
+<div class="container-fluid">
+  <form [formGroup]="form">
+    <div class="row px-xl-5">
+      <div class="col-lg-8">
+        <h5 class="section-title position-relative text-uppercase mb-3">
+          <span class="bg-secondary pr-3">Profile</span>
+        </h5>
+        <div class="bg-light p-30 mb-5">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <label for="name">Name</label>
+              <input class="form-control" formControlName="name" id="name" type="text" pInputText />
+              <small *ngIf="checkoutForm.name.invalid && isSubmitted" class="p-error"
+                >Name is required</small
+              >
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="email">Email</label>
+              <input
+                class="form-control"
+                formControlName="email"
+                id="email"
+                type="text"
+                pInputText
+              />
+              <small *ngIf="checkoutForm.email.invalid && isSubmitted" class="p-error"
+                ><span *ngIf="checkoutForm.email.errors.required">email is required</span>
+                <span *ngIf="checkoutForm.email.errors.email">email is invalid</span></small
+              >
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="color">Phone</label><br />
+              <p-inputMask
+                class="form-control"
+                mask="(999) 999-9999"
+                formControlName="phone"
+                placeholder="(999) 999-9999"
+              ></p-inputMask>
+              <small *ngIf="checkoutForm.phone.invalid && isSubmitted" class="p-error"
+                >phone is required</small
+              >
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="street">Street</label>
+              <input
+                class="form-control"
+                formControlName="street"
+                id="street"
+                type="text"
+                pInputText
+              />
+              <small *ngIf="checkoutForm.street.invalid && isSubmitted" class="p-error"
+                >street is required</small
+              >
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="street">Apartment</label>
+              <input
+                class="form-control"
+                formControlName="apartment"
+                id="apartment"
+                type="text"
+                pInputText
+              />
+              <small *ngIf="checkoutForm.apartment.invalid && isSubmitted" class="p-error"
+                >apartment is required</small
+              >
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="barangay">Barangay</label>
+              <input
+                class="form-control"
+                formControlName="barangay"
+                id="barangay"
+                type="text"
+                pInputText
+              />
+              <small *ngIf="checkoutForm.barangay.invalid && isSubmitted" class="p-error"
+                >barangay is required</small
+              >
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="city">City</label>
+              <input class="form-control" formControlName="city" id="city" type="text" pInputText />
+              <small *ngIf="checkoutForm.city.invalid && isSubmitted" class="p-error"
+                >city is required</small
+              >
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="region">Region</label>
+              <input
+                class="form-control"
+                formControlName="region"
+                id="region"
+                type="text"
+                pInputText
+              />
+              <small *ngIf="checkoutForm.region.invalid && isSubmitted" class="p-error"
+                >region is required</small
+              >
+            </div>
+            <div class="col-md-6 form-group">
+              <label for="street">Zip Code</label>
+              <input class="form-control" formControlName="zip" id="zip" type="text" pInputText />
+              <small *ngIf="checkoutForm.zip.invalid && isSubmitted" class="p-error"
+                >zip is required</small
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="mb-5">
+          <h5 class="section-title position-relative text-uppercase mb-3">
+            <span class="bg-secondary pr-3">Pending Orders</span>
+          </h5>
+          <div class="bg-light p-30">
+            <div class="form-group">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Date Ordered</th>
+                    <th scope="col">Total Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of order">
+                    <td>{{ data.id }}</td>
+                    <td>{{ data.dateOrdered |date: 'medium' }}</td>
+                    <td>{{ data.totalPrice }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<!-- Checkout End -->

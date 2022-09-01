@@ -1,0 +1,24 @@
+<!-- Categories Start -->
+<div class="container-fluid pt-5">
+  <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+    <span class="bg-secondary pr-3">Categories</span>
+  </h2>
+  <div class="row px-xl-5 pb-3">
+    <div class="col-lg-3 col-md-4 col-sm-6 pb-1" *ngFor="let data of categories">
+      <a class="text-decoration-none"  [routerLink]="'/category/' + data.id">
+        <div
+          class="cat-item d-flex align-items-center mb-4"
+          [ngStyle]="{ backgroundColor: data.color }"
+        >
+          <div class="overflow-hidden cat-item-icon" style="width: 100px; height: 100px">
+            <i style="font-size: 60px; margin-top: 20px" class="pi pi-{{ data.icon }}"></i>
+          </div>
+          <div class="flex-fill pl-3">
+            <h6>{{ data.name }}</h6>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+<!-- Categories End -->

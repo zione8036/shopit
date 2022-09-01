@@ -1,0 +1,124 @@
+<p-toast [baseZIndex]="5000"></p-toast>
+<div class="p-grid p-mb-5">
+  <div class="p-col-10"></div>
+  <div class="p-col-2">
+    <div class="p-toolbar-group-right">
+      <p-button
+        styleClass="p-button-secondary"
+        label="Back"
+        icon="pi pi-arrow-circle-left"
+        (click)="onCancel()"
+      ></p-button>
+    </div>
+  </div>
+</div>
+<div class="admin-page" *ngIf="order">
+  <p-card [header]="'View Order'" subheader="You can edit order status here">
+    <div class="p-grid">
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <p-fieldset
+          styleClass="p-mb-4"
+          legend="Order Details"
+          styleClass="p-mb-4"
+          [toggleable]="true"
+        >
+          <p-card styleClass="p-mb-4">
+            <h3>Order ID</h3>
+            <p>{{ order.id }}</p>
+          </p-card>
+          <p-card styleClass="p-mb-4">
+            <h3>Order date</h3>
+            <p>{{ order.dateOrdered | date: 'medium' }}</p>
+          </p-card>
+          <p-card styleClass="p-mb-4">
+            <h3>Order status</h3>
+            <p-dropdown
+              [options]="orderStatuses"
+              optionLabel="name"
+              optionValue="id"
+              (onChange)="onStatusChange($event)"
+              [(ngModel)]="selectedStatus"
+            ></p-dropdown>
+          </p-card>
+          <p-card styleClass="p-mb-4">
+            <h3>Total Price</h3>
+            <p>₱{{ order.totalPrice }}</p>
+          </p-card>
+        </p-fieldset>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <p-fieldset legend="Order Items" styleClass="p-mb-4" [toggleable]="true">
+          <div class="p-grid p-mb-5">
+            <div class="p-col-2 p-text-bold">Name</div>
+            <div class="p-col-2 p-text-bold">Brand</div>
+            <div class="p-col-2 p-text-bold">Category</div>
+            <div class="p-col-2 p-text-bold">Price</div>
+            <div class="p-col-2 p-text-bold">Quantity</div>
+            <div class="p-col-2 p-text-bold">Subtotal</div>
+          </div>
+          <div class="p-grid p-mb-5" *ngFor="let orderItem of order.orderItems">
+            <div class="p-col-2">{{ orderItem.product.name }}</div>
+            <div class="p-col-2">{{ orderItem.product.brand }}</div>
+            <div class="p-col-2">{{ orderItem.product.category.name }}</div>
+            <div class="p-col-2">{{ orderItem.product.price | currency }}</div>
+            <div class="p-col-2">{{ orderItem.quantity }}</div>
+            <div class="p-col-2">{{ orderItem.product.price * orderItem.quantity | currency }}</div>
+          </div>
+          <p-card styleClass="p-mb-4"
+            ><div class="p-grid" style="color: green">
+              <div class="p-col-10 p-text-bold">Total Price</div>
+              <div class="p-col-2 p-text-bold">{{ order.totalPrice | currency }}</div>
+            </div></p-card
+          >
+        </p-fieldset>
+      </div>
+      <div class="p-col-12 p-md-6 p-lg-4">
+        <p-fieldset
+          styleClass="p-mb-4"
+          legend="Shipping Details"
+          styleClass="p-mb-4"
+          [toggleable]="true"
+        >
+          <div class="p-grid">
+            <div class="p-col-4">
+              <p-card styleClass="p-mb-4">
+                <h4>Street</h4>
+                <p>{{ order.shippingAddress }}</p>
+              </p-card>
+              <p-card styleClass="p-mb-4">
+                <h4>Subdivision</h4>
+                <p>{{ order.shippingAddress1 }}</p>
+              </p-card>
+
+              <br />
+              <br />
+            </div>
+
+            <div class="p-col-4">
+              <p-card styleClass="p-mb-4">
+                <h4>Barangay</h4>
+                <p>{{ order.barangay }}</p>
+              </p-card>
+              <p-card styleClass="p-mb-4">
+                <h4>City</h4>
+                <p>{{ order.city }}, {{ order.zip }}</p>
+              </p-card>
+            </div>
+
+            <div class="p-col-4">
+              <h5>Customer Info</h5>
+              <p-card styleClass="p-mb-4">
+                <h4>Name</h4>
+                <p>{{ order.user.name }}</p>
+              </p-card>
+              <p-card styleClass="p-mb-4">
+                <h4>Phone</h4>
+                <p>{{ order.phone }}</p>
+              </p-card>
+            </div>
+          </div>
+        </p-fieldset>
+      </div>
+    </div>
+  </p-card>
+</div>
